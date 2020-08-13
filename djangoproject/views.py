@@ -1,5 +1,7 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
-def hello_world(request):
-    nombre = "Ricardo"
-    return HttpResponse("<html><body><h3>{}</h3></body></html>".format(nombre))
+def login_view(request):
+    return render(request, 'login.html', {})
+
+def desktop_view(request):
+    return render_to_response(request, 'desktop.html', {})
