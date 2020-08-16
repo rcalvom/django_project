@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from app.models import File
 from app.models import User
+from app.forms import FileForm
 
 def login_view(request):
     if request.GET:
@@ -21,15 +22,22 @@ def login_view(request):
 def desktop_view(request):
     return render(request, 'desktop.html', {})
 
-def upload(request):
-    context = {}
+def list_files(request):
+    files = File.objects.all()
+    context = {
+        'files': files
+    }
+    return render(request, 'desktop.html', context)
+
+def upload_file(request):
     if request.method == 'POST':
-        upload_file = request.FILES['document']
-        fs = FileSystemStorage()
-        name = upload_file.name
-        path = fs.save(upload_file.name, upload_file)
-        path = fs.url(path)
-        context['url'] = path
-        file = File(name=name, path=path)
-        file.save()
-    return render(request, 'upload.html', context)
+        form = FileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/list_files')
+    else:
+        form = FileForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'desktop.html', context)
