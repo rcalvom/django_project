@@ -22,9 +22,8 @@ from app.views import login_view, desktop_view, upload_file, list_files
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_view),
-    path('desktop/', desktop_view),
-    path('list_files/', list_files),
-    path('list_files/upload_file/', upload_file),
+    path('desktop/', list_files),
+    path('desktop/upload_file/', upload_file),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

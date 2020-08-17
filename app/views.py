@@ -34,7 +34,7 @@ def upload_file(request):
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('/list_files')
+            return redirect('/desktop')
     else:
         form = FileForm()
     context = {
