@@ -8,3 +8,10 @@ class User(models.Model):
 
     def __str__(self):
         return str(self.id) + ": " + self.username
+
+class File(models.Model):
+    name = models.CharField(max_length=100)
+    path = models.TextField()
+
+    def __str__(self):
+        return self.name
