@@ -17,14 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from app.views import login_view, desktop_view, upload
+from app.views import login_view, desktop_view, upload_file, list_files
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_view),
-    path('upload/', upload),
-    path('desktop/', desktop_view),
+    path('desktop/', list_files),
+    path('desktop/upload_file/', upload_file),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

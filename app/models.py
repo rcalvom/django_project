@@ -11,7 +11,7 @@ class User(models.Model):
 
 class File(models.Model):
     name = models.CharField(max_length=100)
-    path = models.TextField()
+    file = models.FileField(upload_to='files/', max_length=200, default=None)
 
     def __str__(self):
         return self.name
